@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade List</title>
+    <link rel="stylesheet" href="static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="static/css/styles.css">
+</head>
+
+<body>
+    <main class="container pt-4 list-main">
+        <span class="mb-4"><a href="/">Home</a> >> <a href="/show">See Students' Grades</a></span>
+        <h1 class="pt-2 mb-3">Students' Grades</h1>
+        {{if .GradeGroupingByStudentId}}
+        <table class="table mb-5">
+            <tr>
+                <th>Student ID</th>
+                <th>Full Name</th>
+                <th>Grade ID</th>
+                <th>Subject</th>
+                <th>Grade</th>
+            </tr>
+            {{range .GradeGroupingByStudentId}}
+            <tr>
+                <td><a href="/student/{{.StudentID}}">{{.StudentID}}</a></td>
+                <td>{{.FullName}}</td>
+                <td>{{.GradeID}}</td>
+                <td>{{.Subject}}</td>
+                <td>{{.Grade}}</td>
+            </tr>
+            {{end}}
+        </table>
+        {{else}}
+        <p>There are no students nor student grades to show</p>
+        {{end}}
+    </main>
+    <footer>
+        <p>Made by Tadeo Bennett</p>
+    </footer>
+</body>
+
+</html>

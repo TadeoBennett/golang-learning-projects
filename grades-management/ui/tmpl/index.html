@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade Management System</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+
+<body>
+    <h1 class="text-center mt-5 mb-4">Welcome to the Grade Management System</h1>
+    <nav>
+        <ul>
+            <li class="border-start border-black active"><a href="/">Home</a></li>
+            {{if .IsAuthenticated}}
+            <li><a href="/forms">See Forms</a></li>
+            {{end}}
+            <li><a href="/teacher/signup">Sign Up</a></li>
+            <li><a href="/teacher/login">Login</a></li>
+            {{if .IsAuthenticated}}
+            <li>
+                <form action="/teacher/logout" method="post">
+                    <input type="hidden" name="csrf_token" value="{{.CSRFToken}}">
+                    <button class="btn btn-primary text-center">Logout</button>
+                </form>
+            </li>
+            {{end}}
+        </ul>
+    </nav>
+    <main class="index-main text-center mb-4">
+        <div class="d-flex justify-content-center">
+            <div class="row wrap pt-5">
+                {{ with .Flash}}
+                <div class="alert alert-secondary alert-dismissible fade show" role="alert">
+                    <strong>{{.}}</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                {{end}}
+                <div class="col-lg-6 col-md-6 col-sm-6 border-end px-5 pb-5">
+                    Add a Student or Add a grade for an existing student
+                    <br>
+                    <br>
+                    <a href="/forms">
+                        <button class="btn btn-info btn-lg">
+                            See Forms
+                        </button>
+                    </a>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    See the list of grades for each student
+                    <br>
+                    <br>
+                    <br>
+                    <a href="/show">
+                        <button class="btn btn-info btn-lg">
+                            See Student Grades
+                        </button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <p>Made by Tadeo Bennett</p>
+    </footer>
+</body>
+<script src="/static/js/bootstrap.bundle.min.js"></script>
+
+</html>

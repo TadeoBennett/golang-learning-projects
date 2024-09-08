@@ -1,0 +1,13 @@
+METHOD  --     Route        --     HandlerFunction
+
+GET         /teacher/signup        signupTeacherForm
+POST        /teacher/signup        signUpTeacher
+GET         /teacher/login         loginTeacherForm
+POST        /teacher/login         loginTeacher
+POST        /teacher/logout        logoutTeacher
+
+GET         /forms                 displayForms       
+POST        /student/create        createStudent
+GET         /student/:id           getStudent
+POST        /grade/create          createGradeForStudent
+GET         /show                  displayGrades

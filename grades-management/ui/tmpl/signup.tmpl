@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+
+<body>
+    <h1 class="text-center mt-5 mb-4">Welcome to the Grade Management System</h1>
+    <nav>
+        <ul>
+            <li class="border-start border-black"><a href="/">Home</a></li>
+            {{if .IsAuthenticated}}
+            <li><a href="/forms">See Forms</a></li>
+            {{end}}
+            <li class="active"><a href="/teacher/signup">Sign Up</a></li>
+            <li><a href="/teacher/login">Login</a></li>
+            {{if .IsAuthenticated}}
+            <li>
+                <form action="/teacher/logout" method="post">
+                    <input type="hidden" name="csrf_token" value="{{.CSRFToken}}">
+                    <button class="btn btn-primary text-center">Logout</button>
+                </form>
+            </li>
+            {{end}}
+        </ul>
+    </nav>
+    <main class="container mb-4 mt-3">
+        <div class="row justify-content-center">
+            <div class="col-md-6"> <!-- Adjust the column size as needed -->
+                <form class="row g-3 needs-validation" action="/teacher/signup" method="post">
+                    <h3 class="text-center">Sign Up Teacher</h3>
+                    <input type="hidden" name="csrf_token" value="{{.CSRFToken}}">
+                    <div class="col-md-6">
+                        <label for="firstname" class="form-label">First Name</label>
+                        <div class="input-group has-validation">
+                            <input type="text" class="form-control" id="firstname" name="firstname"
+                                placeholder="Enter first name" value="{{ .FormData.Get "firstname" }}">
+                            <div class="invalid-feedback d-block">
+                                {{ with .ErrorsFromForm.fname }}
+                                {{.}}
+                                {{end}}
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <label for="lastname" class="form-label">Last Name</label>
+                        <div class="input-group has-validation">
+                            <input type="text" class="form-control" id="lastname" name="lastname"
+                                placeholder="Enter last name" value="{{ .FormData.Get "lastname" }}">
+                            <div class="invalid-feedback d-block">
+                                {{ with .ErrorsFromForm.lname }}
+                                {{.}}
+                                {{end}}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="email" class="form-label">Email</label>
+                        <div class="input-group has-validation">
+                            <input type="email" class="form-control" id="email" name="email"
+                                placeholder="Enter email" value="{{ .FormData.Get "email" }}">
+                            <div class="invalid-feedback d-block">
+                                {{ with .ErrorsFromForm.email }}
+                                {{.}}
+                                {{end}}
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <label for="password" class="form-label">Password</label>
+                        <div class="input-group has-validation">
+                            <input type="password" class="form-control" id="password" name="password"
+                                placeholder="Enter password" value="{{ .FormData.Get "password" }}">
+                            <div class="invalid-feedback d-block">
+                                {{ with .ErrorsFromForm.password }}
+                                {{.}}
+                                {{end}}
+                            </div>
+                        </div>
+                    </div>
+                    
+
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-primary">Sign Up</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+    
+    <footer>
+        <p>Made by Tadeo Bennett</p>
+    </footer>
+</body>
+
+</html>
