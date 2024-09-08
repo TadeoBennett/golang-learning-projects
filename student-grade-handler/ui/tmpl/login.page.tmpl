@@ -1,0 +1,104 @@
+<!-- Cahlil Tillett
+Tadeo Bennett -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+
+<body>
+    <main class="container">
+        <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+            <a href="/"
+                class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+                <svg class="bi me-2" width="40" height="32">
+                    <use xlink:href="#bootstrap"></use>
+                </svg>
+                <span class="fs-4">Final Project by Cahlil and Tadeo</span>
+            </a>
+
+            <ul class="nav nav-pills">
+                <li class="nav-item"><a href="/" class="nav-link" aria-current="page">Home</a></li>
+                <!-- <li class="nav-item"><a href="/student/add" class="nav-link">Add Student</a></li> -->
+                <!-- <li class="nav-item"><a href="/show" class="nav-link">See All Students</a></li> -->
+                <li class="nav-item"><a href="/teacher/signup" class="nav-link">Teacher Sign Up</a></li>
+                <li class="nav-item"><a href="/teacher/login" class="nav-link active">Teacher Log In</a></li>
+                <!-- <li class="nav-item"><a href="/teacher/login" class="nav-link">Teacher Log In</a></li> -->
+                {{if .IsAuthenticated}}
+                <li class="ms-2 nav-item">
+                    <form action="/teacher/logout" method="post">
+                        <input type="hidden" name="csrf_token" value="{{.CSRFToken}}">
+                        <button class="btn btn-primary text-center m-0">Logout</button>
+                    </form>
+                </li>
+                {{end}}
+            </ul>
+        </header>
+        <div class="row justify-content-center">
+            <div class="row justify-content-center">
+                <div class="col-md-6"> <!-- Adjust the column size as needed -->
+                    <form class="row g-3 needs-validation" action="/teacher/login" method="post">
+                        <input type="hidden" name="csrf_token" value="{{.CSRFToken}}">
+                        <h3 class="text-center">Login Teacher</h3>
+                        {{with .Flash}}
+                        <div class="text-center p-2 bg-light">
+                            <span>{{.}}</span>
+                        </div>
+                        {{end}}
+                        {{with .ErrorsFromForm.default}}
+                        <span class="error-toast text-center mt-2 mb-2">
+                            Incorrect Password or email
+                        </span>
+                        {{end}}
+                        <div class="col-md-12">
+                            <label for="email" class="form-label">Email</label>
+                            <div class="input-group has-validation">
+                                <input type="email" class="form-control" id="email" name="email" placeholder="Enter email"
+                                    value="{{ .FormData.Get "email" }}">
+                                <div class="invalid-feedback d-block">
+                                    {{ with .ErrorsFromForm.email }}
+                                    {{.}}
+                                    {{end}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <label for="password" class="form-label">Password</label>
+                            <div class="input-group has-validation">
+                                <input type="password" class="form-control" id="password" name="password"
+                                    placeholder="Enter password" value="{{ .FormData.Get "password" }}">
+                                <div class="invalid-feedback d-block">
+                                    {{ with .ErrorsFromForm.password }}
+                                    {{.}}
+                                    {{end}}
+                                </div>
+                            </div>
+                        </div>
+    
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary">Log In</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <div>
+            Tadeo Bennett: <a href="mailto:2021154344@ub.edu.bz">2021154344@ub.edu.bz</a>
+        </div>
+        <br>
+        <div>
+            Cahlil Tilett: <a href="mailto:2021154337@ub.edu.bz">2021154337@ub.edu.bz</a>
+        </div>
+    </footer>
+</body>
+
+<script src="/static/js/bootstrap.bundle.min.js"></script>
+
+</html>

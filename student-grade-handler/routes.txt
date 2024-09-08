@@ -1,0 +1,13 @@
+METHOD  --     Route        --     HandlerFunction
+Get             /                   home
+Get             /student/add        createStudentForm
+Post            /student/add        createStudent   
+Get             /student/:id        getStudent
+Get             /show               displayStudents
+
+Get             /teacher/signup     signupTeacherForm
+Post            /teacher/signup     signupTeacher        
+Get             /teacher/login      loginTeacherForm
+Post            /teacher/login      loginTeacher
+Post            /teacher/logout     logoutTeacher
+

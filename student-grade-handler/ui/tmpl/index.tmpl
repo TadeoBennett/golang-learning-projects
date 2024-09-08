@@ -1,0 +1,114 @@
+<!-- Cahlil Tillett
+Tadeo Bennett -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Final</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="/static/css/styles.css" type="text/css">
+</head>
+
+<body>
+    <main class="container">
+        {{with .Flash}}
+        <div class="text-center p-2 bg-light">
+            <span>{{.}}</span>
+        </div>
+        {{end}}
+        <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+            <a href="/"
+                class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+                <svg class="bi me-2" width="40" height="32">
+                    <use xlink:href="#bootstrap"></use>
+                </svg>
+                <span class="fs-4">Final Project by Cahlil and Tadeo</span>
+            </a>
+
+            <ul class="nav nav-pills">
+                <li class="nav-item"><a href="/" class="nav-link active" aria-current="page">Home</a></li>
+                <!-- <li class="nav-item"><a href="/student/add" class="nav-link">Add Student</a></li> -->
+                <!-- <li class="nav-item"><a href="/show" class="nav-link">See All Students</a></li> -->
+                <li class="nav-item"><a href="/teacher/signup" class="nav-link">Teacher Sign Up</a></li>
+                <li class="nav-item"><a href="/teacher/login" class="nav-link">Teacher Log In</a></li>
+                <!-- <li class="nav-item"><a href="/teacher/login" class="nav-link">Teacher Log In</a></li> -->
+                {{if .IsAuthenticated}}
+                <li class="ms-2 nav-item">
+                    <form action="/teacher/logout" method="post">
+                        <input type="hidden" name="csrf_token" value="{{.CSRFToken}}">
+                        <button class="btn btn-primary text-center m-0">Logout</button>
+                    </form>
+                </li>
+                {{end}}
+            </ul>
+        </header>
+        <div class="d-flex grid gap-0 column-gap-2">
+            <div class="row">
+                <div class="col-lg-4 col-md-4 col-sm-6 mb-3">
+                    <div class="card">
+                        <h5 class="card-header">Special Action</h5>
+                        <div class="card-body">
+                            <h5 class="card-title">Add Student</h5>
+                            <p class="card-text">See the form to add a new student. Requires <a href="/teacher/login">teacher login.</a></p>
+                            <a href="/student/add" class="btn btn-primary">See Form</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-6 mb-3">
+                    <div class="card">
+                        <h5 class="card-header">Special Action</h5>
+                        <div class="card-body text-start">
+                            <h5 class="card-title">See Student with ID</h5>
+                            <p class="card-text">Enter a student id to find. Requires <a href="/teacher/login">teacher login.</a></p>
+                            <form action="/student/find" method="post">
+                                <input type="hidden" name="csrf_token" value="{{.CSRFToken}}">
+                                <div class="form-group d-flex">
+                                    <div class="col-6">
+                                        <input type="number" id="student_id" name="student_id" class="form-control">
+                                    </div>
+                                </div>
+                                <br>
+                                <button type="submit" class="btn btn-primary">See Student With ID</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-6 mb-3">
+                    <div class="card">
+                        <h5 class="card-header">Special Action</h5>
+                        <div class="card-body">
+                            <h5 class="card-title">See All Students</h5>
+                            <p class="card-text">See all Students in the database. Requires <a href="/teacher/login">teacher login.</a></p>
+                            <a href="/show" class="btn btn-primary">See Students</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            This Projet Implements the following:
+            <ul>
+                <li>PostgreSQL Database</li>
+                <li>Middleware</li>
+                <li>Centralized Error Handling</li>
+                <li>Dependency Injection</li>
+                <li>Self-Signed Certification</li>
+                <li>Custom Error and Feedback Logging</li>
+            </ul>
+        </div>
+    </main>
+    <footer>
+        <div>
+            Tadeo Bennett: <a href="mailto:2021154344@ub.edu.bz">2021154344@ub.edu.bz</a>
+        </div>
+        <br>
+        <div>
+            Cahlil Tilett: <a href="mailto:2021154337@ub.edu.bz">2021154337@ub.edu.bz</a>
+        </div>
+    </footer>
+</body>
+
+</html>
