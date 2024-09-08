@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+    <header>
+        <h1><a href="/">Login</a></h1>
+    </header>
+    <nav>
+        <div>
+            <a href="/">Home</a>
+            <a href="/quote/create">Create Quote</a>
+        </div>
+        <div>
+            <a href="/user/signup">Signup</a>
+            <!-- <a href="/user/login">Login</a> -->
+            {{if .IsAuthenticated}}
+            <form action="/user/logout" method="post">
+                <input type="hidden" name="csrf_token" value="{{.CSRFToken}}">
+                <button>Logout</button>
+            </form>
+            {{end}}
+        </div>
+    </nav>
+    <br><br>
+    <form action="/user/login" method="POST">
+        <input type="hidden" name="csrf_token" value="{{.CSRFToken}}">
+        {{with .ErrorsFromForm.default}}
+            <div class="error">{{.}}</div>
+        {{end}}
+
+        <div>
+            <label for="">Email</label>
+            <input type="email" name="email" value="{{.FormData.Get "email"}}">
+        </div>
+        <div>
+            <label for="">Password</label>
+            <input type="password" name="password">
+        </div>
+        <div>
+            <input type="submit" value="Login">
+        </div>
+    </form>
+</body>
+</html>

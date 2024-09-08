@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up User</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+    <form action="/user/signup" method="post" nonvalidate>
+        <input type="hidden" name="csrf_token" value="{{.CSRFToken}}">
+        <div>
+            <label for="">Name</label>
+            {{ with .ErrorsFromForm.name}}
+                <label for="" class="error">{{.}}</label>
+            {{end}}
+            <input type="text" name="name" value="{{.FormData.Get "name" }}">
+        </div>
+        <div>
+            <label for="">Email</label>
+            {{ with .ErrorsFromForm.email}}
+                <label for="" class="error">{{.}}</label>
+            {{end}}
+            <input type="email" name="email" value="{{.FormData.Get "email" }}">
+        </div>
+        <div>
+            <label for="">Password</label>
+            {{ with .ErrorsFromForm.password}}
+                <label for="" class="error">{{.}}</label>
+            {{end}}
+            <input type="password" name="password" value="{{.FormData.Get "password" }}">
+        </div>
+        <div>
+            <input type="submit" value="Signup">
+        </div>
+    </form>
+</body>
+</html>

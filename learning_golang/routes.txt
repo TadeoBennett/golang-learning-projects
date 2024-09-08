@@ -1,0 +1,13 @@
+METHOD  --     Route        --  Handler Function
+
+GET         /user/signup        signupUserForm
+POST        /user/signup        signUpUser
+GET         /user/login         loginUserForm
+POST        /user/login         loginUser
+POST        /user/logout        logoutUser
+
+POST - Changes the state of the application
+
+
+
+

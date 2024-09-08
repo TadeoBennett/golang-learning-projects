@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuoteBox</title>
+</head>
+<body>
+    <header>
+        <h1><a href="/">Quotebox</a></h1>
+    </header>
+    <nav>
+        <div>
+            <a href="/">Home</a>
+            {{if .IsAuthenticated}}
+                <a href="/quote/create">Create Quote</a>
+            {{end}}
+            {{if .IsAuthenticated}}
+                <form action="/user/logout" method="post">
+                    <input type="hidden" name="csrf_token" value="{{.CSRFToken}}">
+                    <button>Logout</button>
+                </form>
+            {{else}}
+            <a href="/user/signup">Signup</a>
+            <a href="/user/login">Login</a>
+            {{end}}
+        </div>
+    </nav>
+    {{ if .Quotes }} <!-- if there is data-->
+    {{ range .Quotes }} <!-- iterate over all quotes-->
+
+    <ul>
+        <li>{{ .Body }}</li> 
+        <li><strong>--{{ .Author_name }}</strong></li>
+    </ul>
+    {{end}}
+    {{else}}
+    <p>Nothing to see here. Move along...</p>
+    {{end}}
+
+    <footer>
+        <p>
+            <a href="/quote/create">Insert another quote?</a>
+            </br>
+            <a href="mailto:tadeos.bennett@gmail.com">tadeos.bennett@gmail.com</a>
+        </p>
+    </footer>
+
+
+</body>
+</html>

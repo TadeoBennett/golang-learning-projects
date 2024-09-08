@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Form</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+
+<body>
+    <h1>QuoteBox</h1>
+    <hr>
+    <form action="/quote/create" method="post" id="quoteform">
+        <fieldset>
+            <input type="hidden" name="csrf_token" value="{{.CSRFToken}}">
+            <legend>Add a Quote</legend>
+            <div>
+                <label for="">Author</label>
+                <!-- if a key exists -->
+                {{ with .ErrorsFromForm.author }}
+                    <!-- check for the value of that key-->
+                    <span class="error">{{ . }} </span>
+                {{end}}
+                <input type="text" name="author_name" value="{{ .FormData.Get "author_name" }}">
+            </div>
+            <div>
+                <label for="">Category</label>
+                {{ with .ErrorsFromForm.category }}
+                    <span class="error">{{ . }} </span>
+                {{end}}
+                <input type="text" name="category">
+            </div>
+            <div>
+                <label for="">Quote</label><br>
+                {{ with .ErrorsFromForm.quote }}
+                    <!-- check for the value of that key-->
+                    <span class="error">{{ . }} </span>
+                {{end}}
+                <textarea id="w3review" name="quote" rows="4" cols="50"></textarea>
+            </div>
+            
+            <button type="submit">Save Quote</button>
+        </fieldset>
+    </form>
+    <hr>
+</body>
+
+</html>

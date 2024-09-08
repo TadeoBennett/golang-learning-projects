@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuoteBox</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+    <h2>QuoteBox</h2>
+    <hr>
+    <h3>Quotes</h3>
+    {{ with .Flash}}
+        <div class="flash">{{ . }}</div>
+    {{end}}
+    {{ with .Quote }} <!-- if there is data-->
+        <ul>
+            <li>{{ .Body }}</li> 
+            <li><strong>--{{ .Author_name }}</strong></li>
+        </ul>
+    {{end}}
+
+    <footer>
+        <p>
+            <a href="/quote/create">Insert another quote?</a>
+            </br>
+            <a href="mailto:tadeos.bennett@gmail.com">tadeos.bennett@gmail.com</a>
+        </p>
+    </footer>
+
+
+</body>
+</html>
